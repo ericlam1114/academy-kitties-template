@@ -3,9 +3,9 @@ var colors = Object.values(allColors())
 
 var defaultDNA = {
     "headcolor" : 10,
-    "mouthColor" : 13,
-    "eyesColor" : 96,
-    "earsColor" : 10,
+    "mouthBodyTailColor" : 13,
+    "eyeColor" : 96,
+    "ePColor" : 10,
     //Cattributes
     "eyesShape" : 1,
     "decorationPattern" : 1,
@@ -22,12 +22,12 @@ $( document ).ready(function() {
   $('#dnaeyes').html(defaultDNA.eyesColor);
   $('#dnaears').html(defaultDNA.earsColor);
     
-//   $('#dnashape').html(defaultDNA.eyesShape)
-//   $('#dnadecoration').html(defaultDNA.decorationPattern)
-//   $('#dnadecorationMid').html(defaultDNA.decorationMidcolor)
-//   $('#dnadecorationSides').html(defaultDNA.decorationSidescolor)
-//   $('#dnaanimation').html(defaultDNA.animation)
-//   $('#dnaspecial').html(defaultDNA.lastNum)
+  $('#dnashape').html(defaultDNA.eyesShape)
+  $('#dnadecoration').html(defaultDNA.decorationPattern)
+  $('#dnadecorationMid').html(defaultDNA.decorationMidcolor)
+  $('#dnadecorationSides').html(defaultDNA.decorationSidescolor)
+  $('#dnaanimation').html(defaultDNA.animation)
+  $('#dnaspecial').html(defaultDNA.lastNum)
 
   renderCat(defaultDNA)
 });
@@ -51,10 +51,32 @@ function getDna(){
 function renderCat(dna){
     headColor(colors[dna.headcolor],dna.headcolor)
     $('#bodycolor').val(dna.headcolor)
+    mouthBodyTailColor(colors[dna.mouthBodyTailColor],dna.mouthBodyTailColor)
+    $('#mouthBodyTailColor').val(dna.mouthBodyTailColor)
+    eyeColor(colors[dna.eyeColor],dna.eyeColor)
+    $('#eyeColor').val(dna.eyeColor)
+    ePColor(colors[dna.ePColor],dna.ePColor)
+    $('#ePColor').val(dna.ePColor)
 }
 
 // Changing cat colors
 $('#bodycolor').change(()=>{
     var colorVal = $('#bodycolor').val()
     headColor(colors[colorVal],colorVal)
+})
+$('#mouthBodyTailColor').change(()=>{
+    var colorVal = $('#mouthBodyTailColor').val()
+    mouthBodyTailColor(colors[colorVal],colorVal)
+})
+$('#eyeColor').change(()=>{
+    var colorVal = $('#eyeColor').val()
+    eyeColor(colors[colorVal],colorVal)
+})
+$('#ePColor').change(()=>{
+    var colorVal = $('#ePColor').val()
+    ePColor(colors[colorVal],colorVal)
+})
+$('#eyeshape').change(()=>{
+    var shape = parseInt($('#eyeshape').val())
+    eyeVariation(shape)
 })

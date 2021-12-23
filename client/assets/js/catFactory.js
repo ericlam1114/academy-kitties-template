@@ -20,6 +20,21 @@ function headColor(color,code) {
     $('#headcode').html('code: '+code) //This updates text of the badge next to the slider
     $('#dnabody').html(code) //This updates the body color part of the DNA that is displayed below the cat
 }
+function mouthBodyTailColor(color,code) {
+    $('.cat__tail, .cat__chest_inner, .cat__mouth-contour').css('background', '#' + color)  //This changes the color of the cat
+    $('#mBTCode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnamouth').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+function eyeColor(color,code) {
+    $('.pupil-left, .pupil-right').css('background', '#' + color)  //This changes the color of the cat
+    $('#eyeCode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnaeyes').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
+function ePColor(color,code) {
+    $('.cat__paw-left, .cat__paw-right, .cat__ear--left, .cat__ear--right, .cat__paw-right_inner, .cat__paw-left_inner').css('background', '#' + color)  //This changes the color of the cat
+    $('#ePCode').html('code: '+code) //This updates text of the badge next to the slider
+    $('#dnaears').html(code) //This updates the body color part of the DNA that is displayed below the cat
+}
 
 
 //###################################################
@@ -33,6 +48,34 @@ function eyeVariation(num) {
             normalEyes()
             $('#eyeName').html('Basic')
             break
+        case 2: 
+            normalEyes()
+            $('#eyeName').html('Chill')
+            return eyesType1()
+            break
+        case 3: 
+            normalEyes()
+            $('#eyeName').html('Dreamy')
+            return eyesType2()
+            break
+        case 4: 
+            normalEyes()
+            $('#eyeName').html('High')
+            return eyesType3()
+            break
+        case 5: 
+            normalEyes()
+            $('#eyeName').html('Sleepy')
+            return eyesType4()
+            break
+        case 6: 
+            normalEyes()
+            $('#eyeName').html('Side-Eye')
+            return eyesType5()
+            break
+        default: 
+        console.log('Not 1 or 2');
+        
     }
 }
 
@@ -48,6 +91,21 @@ function decorationVariation(num) {
 
 async function normalEyes() {
     await $('.cat__eye').find('span').css('border', 'none')
+}
+async function eyesType1() {
+    await $('.cat__eye').find('span').css('border-top', '15px solid white')
+}
+async function eyesType2() {
+    await $('.cat__eye').find('span').css('border-bottom', '15px solid white')
+}
+async function eyesType3() {
+    await $('.cat__eye').find('span').css('border-top', '15px solid red')
+}
+async function eyesType4() {
+    await $('.cat__eye').find('span').css('border-top', '25px solid white')
+}
+async function eyesType5() {
+    await $('.cat__eye').find('span').css('border-left', '25px solid white')
 }
 
 async function normaldecoration() {

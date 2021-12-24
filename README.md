@@ -1,2 +1,2 @@
-# academy-kitties-template
-A starter template for bootcamp students building the cryptokitty clone.
+# moralis-cryptokitties
+Ethereum Dapp Programming 101 course from Moralis. This is my fork. 

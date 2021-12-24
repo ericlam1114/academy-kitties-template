@@ -7,10 +7,10 @@ var defaultDNA = {
     "eyeColor" : 96,
     "ePColor" : 10,
     //Cattributes
-    "eyesShape" : 1,
+    "eyeShape" : 1,
     "decorationPattern" : 1,
-    "decorationMidcolor" : 13,
-    "decorationSidescolor" : 13,
+    "innerHair" : 13,
+    "outerHair" : 50,
     "animation" :  1,
     "lastNum" :  1
     }
@@ -57,6 +57,11 @@ function renderCat(dna){
     $('#eyeColor').val(dna.eyeColor)
     ePColor(colors[dna.ePColor],dna.ePColor)
     $('#ePColor').val(dna.ePColor)
+    innerHair(colors[dna.innerHair],dna.innerHair)
+    $('#innerHair').val(dna.innerHair)
+    outerHair(colors[dna.outerHair],dna.outerHair)
+    $('#outerHair').val(dna.outerHair)
+   
 }
 
 // Changing cat colors
@@ -76,7 +81,20 @@ $('#ePColor').change(()=>{
     var colorVal = $('#ePColor').val()
     ePColor(colors[colorVal],colorVal)
 })
-$('#eyeshape').change(()=>{
-    var shape = parseInt($('#eyeshape').val())
+$('#eyeShape').change(()=>{
+    var shape = parseInt($('#eyeShape').val())
     eyeVariation(shape)
+})
+$('#hairshape').change(()=>{
+    var shape = parseInt($('#hairshape').val())
+    decorationVariation(shape)
+    
+})
+$('#innerHair').change(()=>{
+    var colorVal = $('#innerHair').val()
+    innerHair(colors[colorVal],colorVal)
+})
+$('#outerHair').change(()=>{
+    var colorVal = $('#outerHair').val()
+    outerHair(colors[colorVal],colorVal)
 })

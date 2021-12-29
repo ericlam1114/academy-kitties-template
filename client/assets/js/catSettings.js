@@ -4,14 +4,14 @@ var colors = Object.values(allColors())
 var defaultDNA = {
     "headcolor" : 10,
     "mouthBodyTailColor" : 13,
-    "eyeColor" : 96,
+    "eyeColorPupil" : 96,
     "ePColor" : 10,
     //Cattributes
     "eyeShape" : 1,
     "decorationPattern" : 1,
     "innerHair" : 13,
     "outerHair" : 50,
-    "animation" :  1,
+    "animation" :  2,
     "lastNum" :  1
     }
 
@@ -19,7 +19,7 @@ var defaultDNA = {
 $( document ).ready(function() {
   $('#dnabody').html(defaultDNA.headColor);
   $('#dnamouth').html(defaultDNA.mouthColor);
-  $('#dnaeyes').html(defaultDNA.eyesColor);
+  $('#dnaeyes').html(defaultDNA.eyeColorPupil);
   $('#dnaears').html(defaultDNA.earsColor);
     
   $('#dnashape').html(defaultDNA.eyesShape)
@@ -53,14 +53,16 @@ function renderCat(dna){
     $('#bodycolor').val(dna.headcolor)
     mouthBodyTailColor(colors[dna.mouthBodyTailColor],dna.mouthBodyTailColor)
     $('#mouthBodyTailColor').val(dna.mouthBodyTailColor)
-    eyeColor(colors[dna.eyeColor],dna.eyeColor)
-    $('#eyeColor').val(dna.eyeColor)
+    eyeColor(colors[dna.eyeColorPupil],dna.eyeColorPupil)
+    $('#eyeColor').val(dna.eyeColorPupil)
     ePColor(colors[dna.ePColor],dna.ePColor)
     $('#ePColor').val(dna.ePColor)
     innerHair(colors[dna.innerHair],dna.innerHair)
     $('#innerHair').val(dna.innerHair)
     outerHair(colors[dna.outerHair],dna.outerHair)
     $('#outerHair').val(dna.outerHair)
+    animationVariation(dna.animation);
+    $("#animation").val(dna.animation);
    
 }
 
@@ -75,7 +77,7 @@ $('#mouthBodyTailColor').change(()=>{
 })
 $('#eyeColor').change(()=>{
     var colorVal = $('#eyeColor').val()
-    eyeColor(colors[colorVal],colorVal)
+    eyeColors(colors[colorVal],colorVal)
 })
 $('#ePColor').change(()=>{
     var colorVal = $('#ePColor').val()
@@ -98,3 +100,79 @@ $('#outerHair').change(()=>{
     var colorVal = $('#outerHair').val()
     outerHair(colors[colorVal],colorVal)
 })
+$('#animation').change(()=>{
+    var animationVal = parseInt($('#animation').val())
+    animationVariation(animationVal)
+})
+
+
+//Randomize Function
+$('#random').click(()=>{
+    var bodycolor = Math.floor(Math.random() * 89) + 10;
+    headColor(colors[bodycolor],bodycolor)
+    $("#bodycolor").val(bodycolor)
+
+    var mouthColor = Math.floor(Math.random() * 89) + 10;
+    mouthBodyTailColor(colors[mouthColor],mouthColor)
+    $("#mouthBodyTailColor").val(mouthcolor)
+
+    var pupilColors = Math.floor(Math.random() * 89) + 10;
+    eyeColor(colors[pupilColors],pupilColors)
+    $("#eyeColor").val(pupilColors)
+
+    var earscolor = Math.floor(Math.random() * 89) + 10;
+    earsColor(colors[earscolor],earscolor)
+    $("#earscolor").val(earscolor)
+
+    var eyevar = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+    eyeVariation(eyevar)
+    $("#eyeshape").val(eyevar)
+
+    var decovar = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+    decorationVariation(decovar)
+    $("#decorationstyle").val(decovar)
+
+    var decMidVar = Math.floor(Math.random() * 89) + 10;
+    decorationMidColorVar(colors[decMidVar],decMidVar)
+    $("#decMidColor").val(decMidVar)
+
+    var decSideVar = Math.floor(Math.random() * 89) + 10;
+    decorationSidesColorVar(colors[decSideVar],decSideVar)
+    $("#decSideColor").val(decSideVar)
+
+    var anim = Math.floor(Math.random() * (7 - 1 + 1) + 1);
+    animationsPlayer(anim)
+    $("#animation").val(anim)
+  })
+  
+//   $('#reset').click(()=>{
+  
+//     headColor(colors[defaultDNA.headColor],defaultDNA.headColor)
+//     $("#bodycolor").val(defaultDNA.headColor)
+   
+//     mouthColor(colors[defaultDNA.mouthColor],defaultDNA.mouthColor)
+//     $("#mouthcolor").val(defaultDNA.mouthColor)
+   
+//     eyesColor(colors[defaultDNA.eyesColor],defaultDNA.eyesColor)
+//     $("#eyescolor").val(defaultDNA.eyesColor)
+    
+//     earsColor(colors[defaultDNA.earsColor],defaultDNA.earsColor)
+//     $("#earscolor").val(defaultDNA.earsColor)
+  
+//     eyeVariation(defaultDNA.eyesShape)
+//     $("#eyeshape").val(defaultDNA.eyesShape)
+    
+//     decorationVariation(defaultDNA.decorationPattern)
+//     $("#decorationstyle").val(defaultDNA.decorationPattern)
+  
+//     decorationMidColorVar(colors[defaultDNA.decorationMidcolor],defaultDNA.decorationMidcolor)
+//     $("#decMidColor").val(defaultDNA.decorationMidcolor)
+    
+//     decorationSidesColorVar(colors[defaultDNA.decorationSidescolor],defaultDNA.decorationSidescolor)
+//     $("#decSideColor").val(defaultDNA.decorationSidescolor)
+  
+//     animationsPlayer(defaultDNA.animation)
+//     $("#animation").val(defaultDNA.animation)
+  
+    
+//   })

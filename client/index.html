@@ -7,8 +7,11 @@
   <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
   <script src="assets/bootstrap/js/popper.js"></script>
   <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+  
 
   <link rel="stylesheet" href="assets/css/mystyle.css">
+  <link rel="stylesheet" href="assets/css/pageInteraction.css">
+  <link rel="stylesheet" href="assets/bootstrap/css/animations.css">
   <link rel="stylesheet" href="assets/css/cats.css">
   <link rel="stylesheet" href="assets/css/colors.css">
   <link rel="stylesheet" href="assets/css/factory.css">
@@ -23,7 +26,8 @@
         <div class="row">
             <div class="col-lg-4 catBox m-2 light-b-shadow">
                 <div class="cat">
-                    <div class="cat__ear">
+                    
+                    <div class="cat__ear ">
                         <div id="leftEar" class="cat__ear--left">
                             <div class="cat__ear--left-inside"></div>
                         </div>
@@ -31,7 +35,7 @@
                             <div class="cat__ear--right-inside"></div>
                         </div>
                     </div>
-
+                   
                     <div id="head" class="cat__head">
                         <div id="midDot" class="cat__head-dots">
                             <div id="leftDot" class="cat__head-dots_first"></div>
@@ -45,7 +49,7 @@
                                 <span class="pupil-right"></span>
                             </div>
                         </div>
-                        <div class="cat__nose"></div>
+                        <div class="cat__nose" id="nose"></div>
                         
                         <div class="cat__mouth-contour"></div>
                         <div class="cat__mouth-left"></div>
@@ -88,7 +92,7 @@
                          <span id="dnadecoration"></span>
                          <span id="dnadecorationMid"></span>
                          <span id="dnadecorationSides"></span>
-                         <span id="dnadanimation"></span>
+                         <span id="dnaanimation"></span>
                          <span id="dnaspecial"></span>
                     </b>
                 </div>
@@ -96,7 +100,13 @@
             <div class="col-lg-7 cattributes m-2 light-b-shadow">
 
             <!-- Cat colors -->
-<div id="catColors">
+            <div class="tab">
+                <button type="button" class="tablinks btn btn-primary" onclick="openCity(event, 'London')">Traits</button>
+                <button type="button" class="tablinks btn btn-primary" onclick="openCity(event, 'Paris')">Colors</button>
+                
+              </div>
+              <div id="London" class="tabcontent">
+                
                 <div class="form-group">
                     <label for="formControlRange"><b>Head | Body</b><span class="badge badge-dark ml-2" id="headcode"></span></label>
                     <input type="range" min="10" max="98" class="form-control-range" id="bodycolor">
@@ -109,33 +119,49 @@
                     <label for="formControlRange"><b>Eyes</b><span class="badge badge-dark ml-2" id="eyeCode"></span></label>
                     <input type="range" min="10" max="98" class="form-control-range" id="eyeColor">
                 </div>
-            </div>
-            <div class="form-group">
-                <label for="formControlRange"><b>Ears | Paws</b><span class="badge badge-dark ml-2" id="ePCode"></span></label>
-                <input type="range" min="10" max="98" class="form-control-range" id="ePColor">
-            </div>
-            <div class="form-group">
-                <label for="formControlRange"><b>Eyes Shape</b><span class="badge badge-dark ml-2" id="eyeName"></span></label>
-                <input type="range" min="1" max="6" class="form-control-range" id="eyeShape">
-            </div>
-            <div class="form-group">
-                <label for="formControlRange"><b>Hair Style</b><span class="badge badge-dark ml-2" id="hairName"></span></label>
-                <input type="range" min="1" max="5" class="form-control-range" id="hairshape">
-            </div>
-            <div class="form-group">
-                <label for="formControlRange"><b>Hair Color</b><span class="badge badge-dark ml-2" id="innerHairName"></span></label>
-                <input type="range" min="10" max="98" class="form-control-range" id="innerHair">
-            </div>
-            <div class="form-group">
-                <label for="formControlRange"><b>Sidburn Color</b><span class="badge badge-dark ml-2" id="outerHairName"></span></label>
-                <input type="range" min="10" max="98" class="form-control-range" id="outerHair">
-            </div>
+                <div class="form-group">
+                    <label for="formControlRange"><b>Ears | Paws</b><span class="badge badge-dark ml-2" id="ePCode"></span></label>
+                    <input type="range" min="10" max="98" class="form-control-range" id="ePColor">
+                    <div class="form-group">
+                        <label for="formControlRange"><b>Hair Color</b><span class="badge badge-dark ml-2" id="innerHairName"></span></label>
+                        <input type="range" min="10" max="98" class="form-control-range" id="innerHair">
+                    </div>
+                    <div class="form-group">
+                        <label for="formControlRange"><b>Sidburn Color</b><span class="badge badge-dark ml-2" id="outerHairName"></span></label>
+                        <input type="range" min="10" max="98" class="form-control-range" id="outerHair">
+                        </div>
+                        
+                        <!-- </div> -->
+                    <!-- </div> -->
+                    <div id="Paris" class="tabcontent">
+                        <div id="catColors">
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Eyes Shape</b><span class="badge badge-dark ml-2" id="eyeName"></span></label>
+                                <input type="range" min="1" max="6" class="form-control-range" id="eyeShape">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Hair Style</b><span class="badge badge-dark ml-2" id="hairName"></span></label>
+                                <input type="range" min="1" max="5" class="form-control-range" id="hairshape">
+                            </div>
+                            <div class="form-group">
+                                <label for="formControlRange"><b>Animation</b><span class="badge badge-dark ml-2" id="animationName"></span></label>
+                                <input type="range" min="1" max="4" class="form-control-range" id="animation">
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
 
-            </div>
 
             </div>
             <br>
 
+        </div>
+        <div class="col-lg-7">
+            <button id="random" type="button" class="btn btn-primary btn-lg">Randomize</button>
+            <button id="reset" type="button" class="btn btn-primary btn-lg">Reset</button>
+            <button type="button" class="btn btn-primary btn-lg">Create</button>
+    
         </div>
 
 
@@ -149,5 +175,6 @@
   <script src="assets/js/colors.js"></script>
   <script src="assets/js/catSettings.js"></script>
   <script src="assets/js/catFactory.js"></script>
+  <script src="assets/js/pageInteraction.js"></script>
 
 </html>

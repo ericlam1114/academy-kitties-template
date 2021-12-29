@@ -25,7 +25,7 @@ function mouthBodyTailColor(color,code) {
     $('#mBTCode').html('Color: #'+code) //This updates text of the badge next to the slider
     $('#dnamouth').html(code) //This updates the body color part of the DNA that is displayed below the cat
 }
-function eyeColor(color,code) {
+function eyeColors(color,code) {
     $('.pupil-left, .pupil-right').css('background', '#' + color)  //This changes the color of the cat
     $('#eyeCode').html('Color: #'+code) //This updates text of the badge next to the slider
     $('#dnaeyes').html(code) //This updates the body color part of the DNA that is displayed below the cat
@@ -84,7 +84,7 @@ function eyeVariation(num) {
             return eyesType5()
             break
         default: 
-        console.log('Not 1 or 2');
+        
         
     }
 }
@@ -114,6 +114,59 @@ function decorationVariation(num) {
             break
        
     }
+}
+
+function animationVariation(num){
+    $('dnaanimation').html(num);
+    switch(num){
+        case 1:
+            $('#animationName').html('Bobbing')
+            animationType1()
+            break;
+
+        case 2: 
+            $("#animationName").html(`Sniffle`)
+            animationType2()
+            break;
+        case 3: 
+            $("#animationName").html(`Sassy`)
+            animationType3()
+            break;
+        case 4: 
+            $("#animationName").html(`Chill`)
+            animationType4()
+            break;
+
+
+    }
+
+}
+function animationType1(){
+    resetAnimation()
+    $("#head").addClass("movingHead");
+}
+function animationType2(){
+    resetAnimation()
+    $('#nose').addClass("snifflingNose");
+
+}
+function animationType3(){
+    resetAnimation()
+    $('#head').addClass("sassyNeck");
+
+}
+function animationType4(){
+    resetAnimation()
+    $('#head').addClass("chill");
+
+}
+
+
+function resetAnimation(){
+    $("#head").removeClass("movingHead");
+    $("#nose").removeClass("snifflingNose");
+    $("#head").removeClass("sassyNeck");
+    $('#head').removeClass("chill");
 }
 
 async function normalEyes() {

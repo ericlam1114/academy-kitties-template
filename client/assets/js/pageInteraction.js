@@ -14,3 +14,5 @@ function openCity(evt, cityName){
     document.getElementById(cityName).style.display = "block";
     evt.currentTarget.className += " active";
 }
+
+//allows click and tab toggle

@@ -55,7 +55,7 @@ function renderCat(dna){
     $('#bodycolor').val(dna.headcolor)
     mouthBodyTailColor(colors[dna.mouthBodyTailColor],dna.mouthBodyTailColor)
     $('#mouthBodyTailColor').val(dna.mouthBodyTailColor)
-    eyeColor(colors[dna.eyeColorPupil],dna.eyeColorPupil)
+    eyeColors(colors[dna.eyeColorPupil],dna.eyeColorPupil)
     $('#eyeColor').val(dna.eyeColorPupil)
     ePColor(colors[dna.ePColor],dna.ePColor)
     $('#ePColor').val(dna.ePColor)
@@ -119,7 +119,7 @@ $('#random').click(()=>{
     $("#mouthBodyTailColor").val(mouthcolor)
 
     var pupilColors = Math.floor(Math.random() * 89) + 10;
-    eyeColor(colors[pupilColors],pupilColors)
+    eyeColors(colors[pupilColors],pupilColors)
     $("#eyeColor").val(pupilColors)
 
     var earscolor = Math.floor(Math.random() * 89) + 10;

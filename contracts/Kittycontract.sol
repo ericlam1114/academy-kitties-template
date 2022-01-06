@@ -1,12 +1,15 @@
 pragma solidity ^0.8.0;
 
 import "./IERC721.sol";
+import "./IERC721Receiver.sol";
 import "./Ownable.sol";
 
-abstract contract Kittycontract is IERC721, Ownable {
+abstract contract Kittycontract is IERC721, Ownable, IERC721Receiver {
 
     string public constant catTokenName = "Cat";
     string public constant catSymbol = "CT";
+
+    bytes4 internal constant MAGIC_ERC721_RECEIVED = bytes4(keccak256("onERC721Received(address,address,uint256,bytes)"));
 
 
     mapping(address => uint256) tokenOwnershipCount;
@@ -16,6 +19,21 @@ abstract contract Kittycontract is IERC721, Ownable {
 
     uint256 public gen0Counter; 
     uint256 public CREATION_LIMIT_GEN0 = 10; 
+
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId) external{
+        _safeTransfer(_from, _to, _tokenId, "");
+    }
+    
+    
+    function safeTransferFrom(address _from, address _to, uint256 _tokenId, bytes calldata data) external{
+        require(_isApprovedOrOwner(msg.sender, _from, _to, _tokenId));
+        _safeTransfer(_from, _to, _tokenId, "");
+    }
+
+    function _safeTransfer(address _from, address _to, uint256 _tokenId, bytes memory _data) internal{
+        _transfer(_from, _to, _tokenId);
+        // require(_checkERC721Support(_from, _to, _tokenId, _data));
+    }
 
     function transferFrom(address _from, address _to, uint256 _tokenId) public {
         require(_to != address(0));
@@ -57,6 +75,9 @@ abstract contract Kittycontract is IERC721, Ownable {
          return _createKitty(0, 0, 0, _genes, msg.sender);
     }
 
+    bytes4 private constant _INTERFACE_ID_ERC721 = 0x80ac58cd;
+    bytes4 private constant _INTERFACE_ID_ERC165 = 0x01ffc9a7;
+
 
     event Birth(address owner, uint256 kittenId, uint256 mumId, uint256 dadId, uint256 genes);
 
@@ -70,6 +91,10 @@ abstract contract Kittycontract is IERC721, Ownable {
     }
 
     Cat[] cats;
+
+    function supportsInterface(bytes4 _InterfaceId) external pure returns(bool){
+        return ( _InterfaceId == _INTERFACE_ID_ERC721 || _InterfaceId == _INTERFACE_ID_ERC165);
+    }
 
     function _createKitty(
         uint256 _mumId,
@@ -149,5 +174,30 @@ kittyIndexToApproved[_tokenId] = _approved;
 
 function _approvedFor(address _claimant, uint256 _tokenId) internal view returns (bool){
     return kittyIndexToApproved[_tokenId] == _claimant;
+}
+
+// function _checkERC721Support(address _from,address _to,uint256 _tokenId,bytes memory _data) internal returns (bool){
+// if(_isContract(_to)){
+//     return true;
+// }
+
+// //     bytes4 returnData = IERC721Receiver(_to).onERC721RECEIVED(msg.sender, _from, _tokenId, _data);
+// //     return returnData = MAGIC_ERC721_RECEIVED;
+
+// // }
+// // function _isContract(address _to) view internal returns(bool){
+// // uint32 size;
+// // assembly{
+// //     size := extcodesize(_to)
+// // }
+// // return size > 0;
+// // }
+// }
+
+function _isApprovedOrOwner(address _spender, address _from, address _to, uint256 _tokenId) internal view returns (bool){
+    require(_owns(_from, _tokenId));
+    require(_to != address(0));
+        require(_tokenId < cats.length);
+        return (_spender == _from || _approvedFor(_spender, _tokenId) || isApprovedForAll(_from, _spender)); 
 }
 }

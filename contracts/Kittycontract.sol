@@ -20,6 +20,37 @@ abstract contract Kittycontract is IERC721, Ownable, IERC721Receiver {
     uint256 public gen0Counter; 
     uint256 public CREATION_LIMIT_GEN0 = 10; 
 
+    // abstract constructor() public{
+    //     _createKitty(0,0,0, uint256(-1), address(0));
+    // }
+
+    function breed(uint256 _dadId, uint256 _mumId) public returns(uint256){
+        require(tokenIdOwnerMapping[_dadId] == msg.sender, "the user doesn't own the token");
+        require(tokenIdOwnerMapping[_mumId] == msg.sender, "the user doesn't own the token");
+
+        (uint256 dadDna,,,,uint256 DadGeneration) = getKitty(_dadId);
+        (uint256 mumDna,,,,uint256 MumGeneration) = getKitty(_mumId);
+
+
+
+        uint256 newDna = _mixDna(_dadId, _mumId);
+
+        uint256 kidGen = 0;
+        if(DadGeneration < MumGeneration){
+            kidGen = MumGeneration + 1;
+            kidGen /= 2;
+
+        }else if (DadGeneration > MumGeneration){
+            kidGen = DadGeneration + 1;
+            kidGen /= 2;
+
+        }else{
+            kidGen = MumGeneration + 1;
+        }
+
+        _createKitty(_mumId, _dadId, kidGen, newDna, msg.sender);
+    }
+
     function safeTransferFrom(address _from, address _to, uint256 _tokenId) external{
         _safeTransfer(_from, _to, _tokenId, "");
     }
@@ -67,6 +98,23 @@ abstract contract Kittycontract is IERC721, Ownable, IERC721Receiver {
         return _operatorApprovals[owner][operator];
     }
 
+
+    function getKitty(uint256 _id) public view returns(
+        uint256 genes, 
+        uint256 birthTime, 
+        uint256 mumId, 
+        uint256 dadId, 
+        uint256 generation
+    )
+    {
+        Cat storage kitty = cats[_id];
+        birthTime = uint256(kitty.birthTime);
+        mumId = uint256(kitty.mumId);
+        dadId = uint256(kitty.dadId);
+        generation = uint256(kitty.generation);
+        genes = kitty.genes;
+        
+    }
     function createKittyGen0(uint256 _genes) public onlyOwner returns(uint256){
         require(gen0Counter < CREATION_LIMIT_GEN0);
 
@@ -199,5 +247,14 @@ function _isApprovedOrOwner(address _spender, address _from, address _to, uint25
     require(_to != address(0));
         require(_tokenId < cats.length);
         return (_spender == _from || _approvedFor(_spender, _tokenId) || isApprovedForAll(_from, _spender)); 
+}
+function _mixDna(uint256 _dadDna, uint256 _mumDna) internal returns(uint256){
+    uint256 firstHalf = _dadDna / 100000000;
+    uint256 secondHalf = _mumDna % 100000000;
+
+    uint256 newDna = firstHalf * 100000000;
+    newDna = newDna + secondHalf;
+    return newDna;
+
 }
 }
